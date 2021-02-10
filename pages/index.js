@@ -1,65 +1,80 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import Head from "next/head"
+import styles from "../styles/Home.module.scss"
+import { useState, useEffect } from "react"
 
-export default function Home() {
+export default function Home({ data }) {
+  const [inputValue, setInputValue] = useState("")
+  const [imgUrl, setImgUrl] = useState("")
+
+  function handleChange(event) {
+    setInputValue(event.target.value)
+  }
+
+  useEffect(() => {
+    const preUrl = inputValue.substr(0, inputValue.lastIndexOf("/") + 1)
+    setImgUrl(preUrl)
+  }, [inputValue])
+
   return (
     <div className={styles.container}>
       <Head>
-        <title>Create Next App</title>
+        <title>Alastory</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+        <header className={styles.header}>
+          <h1>Alastory</h1>
+          <span className={styles.slogan}>Volvé a compartir ✈</span>
+        </header>
+        <section className={styles.intro}>
+          <p>
+            <ol>
+              <li>Pegá el link del post</li>
+              <li>Presioná "Alastory"</li>
+              <li>Mantené presionada la imagen.</li>
+              <li>
+                Elegí "Compartir imagen" y luego "Stories".
+                <br />
+                <img src="/images/paso_compartir.png" />
+                <br />
+                <img src="/images/paso_stories.png" />
+              </li>
+              <li>Etiquetá a la cuenta.</li>
+            </ol>
+          </p>
+        </section>
 
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
+        <section className={styles.bar}>
+          <div>
+            <input
+              placeholder="Link del post de Instagram"
+              type="text"
+              value={inputValue}
+              onChange={handleChange}
+            />
+            <a
+              className={!inputValue && styles.disabled}
+              target="_blank"
+              href="https://www.instagram.com/p/CLE0R9ELjao/media/?size=l"
+            >
+              Alastory
+            </a>
+          </div>
+        </section>
       </main>
 
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
+      <footer className={styles.footer}></footer>
     </div>
   )
+}
+
+export async function getStaticProps(context) {
+  const res = await fetch(
+    `https://www.instagram.com/p/CLE0R9ELjao/media/?size=l`
+  )
+  const data = await res.text()
+  return {
+    props: { data }, // will be passed to the page component as props
+  }
 }
