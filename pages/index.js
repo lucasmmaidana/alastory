@@ -32,6 +32,11 @@ export default function Home({ data }) {
             <ol>
               <li>Pegá el link del post</li>
               <li>Presioná "Alastory"</li>
+              <li>
+                Elegí abrir con Chrome, o el navegador que uses.
+                <br />
+                <img src="/images/paso_chrome.png" />
+              </li>
               <li>Mantené presionada la imagen.</li>
               <li>
                 Elegí "Compartir imagen" y luego "Stories".
