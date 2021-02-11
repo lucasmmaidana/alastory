@@ -12,7 +12,7 @@ export default function Home({ data }) {
 
   useEffect(() => {
     const preUrl = inputValue.substr(0, inputValue.lastIndexOf("/") + 1)
-    setImgUrl(preUrl)
+    setImgUrl(preUrl + "media/?size=l")
   }, [inputValue])
 
   return (
@@ -56,7 +56,7 @@ export default function Home({ data }) {
             <a
               className={!inputValue && styles.disabled}
               target="_blank"
-              href="https://www.instagram.com/p/CLE0R9ELjao/media/?size=l"
+              href={imgUrl}
             >
               Alastory
             </a>
