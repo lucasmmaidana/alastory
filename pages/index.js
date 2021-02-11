@@ -53,11 +53,7 @@ export default function Home({ data }) {
               value={inputValue}
               onChange={handleChange}
             />
-            <a
-              className={!inputValue && styles.disabled}
-              target="_blank"
-              href={imgUrl}
-            >
+            <a className={!inputValue && styles.disabled} href={imgUrl}>
               Alastory
             </a>
           </div>
