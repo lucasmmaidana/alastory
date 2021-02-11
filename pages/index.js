@@ -47,6 +47,7 @@ export default function Home({ data }) {
               </li>
               <li>Etiquetá a la cuenta.</li>
             </ol>
+            <iframe src={imgUrl} />
           </p>
         </section>
 
