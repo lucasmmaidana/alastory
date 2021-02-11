@@ -10,6 +10,10 @@ export default function Home({ data }) {
     setInputValue(event.target.value)
   }
 
+  function redirect() {
+    document.location.href = imgUrl
+  }
+
   useEffect(() => {
     const preUrl = inputValue.substr(0, inputValue.lastIndexOf("/") + 1)
     setImgUrl(preUrl + "media/?size=l")
@@ -48,6 +52,7 @@ export default function Home({ data }) {
               <li>Etiquetá a la cuenta.</li>
             </ol>
             <iframe src={imgUrl} />
+            <img src={imgUrl} />
           </p>
         </section>
 
@@ -59,7 +64,10 @@ export default function Home({ data }) {
               value={inputValue}
               onChange={handleChange}
             />
-            <a className={!inputValue && styles.disabled} href={imgUrl}>
+            <a
+              onClick={() => redirect()}
+              className={!inputValue && styles.disabled}
+            >
               Alastory
             </a>
           </div>
